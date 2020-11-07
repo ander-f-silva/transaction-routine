@@ -1,4 +1,4 @@
-package br.com.pm.account.domain.repository;
+package br.com.pm.account.domain.repositories;
 
 import br.com.pm.account.infrastructure.jpa.entities.AccountEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
