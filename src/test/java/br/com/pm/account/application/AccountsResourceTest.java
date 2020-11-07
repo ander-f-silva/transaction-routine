@@ -1,6 +1,7 @@
 package br.com.pm.account.application;
 
 import br.com.pm.account.application.dto.AccountRequest;
+import br.com.pm.account.application.dto.AccountResponse;
 import br.com.pm.account.domain.repositories.AccountRepository;
 import br.com.pm.account.infrastructure.jpa.entities.AccountEntity;
 import org.junit.jupiter.api.DisplayName;
@@ -59,5 +60,25 @@ class AccountsResourceTest {
     var response = restTemplate.postForEntity("/accounts", request, Void.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
+  }
+
+  @Test
+  @DisplayName("should return the data an account")
+  void testFindAccountWihSuccess() {
+    var account = accountRepository.save(new AccountEntity("37995834080"));
+    var id = account.getId();
+
+    var response = restTemplate.getForEntity("/accounts/"+id, AccountResponse.class);
+
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    assertThat(response.getBody().getId()).isEqualTo(id);
+    assertThat(response.getBody().getDocumentNumber()).isEqualTo(account.getDocumentNumber());
+  }
+
+  @Test
+  @DisplayName("should return the data an account")
+  void testFindAccountNotFound() {
+    var response = restTemplate.getForEntity("/accounts/0", AccountResponse.class);
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
   }
 }
