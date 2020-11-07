@@ -2,6 +2,7 @@ package br.com.pm.account.application.handler;
 
 import br.com.pm.account.application.dto.MessageResponse;
 import br.com.pm.account.domain.services.exception.AccountAlreadyCreatedException;
+import br.com.pm.account.domain.services.exception.AccountNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,5 +15,10 @@ class TransactionRoutineExceptionHandler extends ResponseEntityExceptionHandler 
     @ExceptionHandler(AccountAlreadyCreatedException.class)
     ResponseEntity<?> handleConflict(RuntimeException runtimeException, WebRequest request) {
         return new ResponseEntity<>(new MessageResponse(HttpStatus.CONFLICT.value(), runtimeException.getMessage()), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(AccountNotFoundException.class)
+    ResponseEntity<?> handleNotFound(RuntimeException runtimeException, WebRequest request) {
+        return new ResponseEntity<>(new MessageResponse(HttpStatus.NOT_FOUND.value(), runtimeException.getMessage()), HttpStatus.NOT_FOUND);
     }
 }
