@@ -1,6 +1,8 @@
 package br.com.pm.account.application;
 
 import br.com.pm.account.application.dto.AccountRequest;
+import br.com.pm.account.domain.repositories.AccountRepository;
+import br.com.pm.account.infrastructure.jpa.entities.AccountEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class AccountsResourceTest {
   @Autowired private TestRestTemplate restTemplate;
+  @Autowired private AccountRepository accountRepository;
 
   @Test
   @DisplayName("should create an account with success")
@@ -45,5 +48,16 @@ class AccountsResourceTest {
     var response = restTemplate.postForEntity("/accounts", request, Void.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+  }
+
+  @Test
+  @DisplayName("should fail to existing account already registered")
+  void testExistingAccount() {
+    accountRepository.save(new AccountEntity("97242904099"));
+
+    var request = new HttpEntity<>(new AccountRequest("97242904099"), new HttpHeaders());
+    var response = restTemplate.postForEntity("/accounts", request, Void.class);
+
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
   }
 }
