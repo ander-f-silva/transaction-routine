@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 class TransactionService implements TransactionOperation{
     @Override
     public Long authorizerTransaction(TransactionRequest transactionRequest) {
-        return null;
+        return 1L;
     }
 }
