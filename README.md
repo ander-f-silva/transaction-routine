@@ -8,8 +8,9 @@ Desenvolvi uma solução para registrar as operações de pagamentos e compras p
 
 ## Reflexão sobre o problema
 
-Para construir a aplicação utilizei o framework Spring, pois, por ter maior conhecimento e por conhecer melhor os seus recursos para criar os testes e configurar o acesso ao banco de dados.
-Para este projeto não será há necessidade de realizar de instalar as ferramentas para fazer o build e o deploy. Neste caso estou a utilizar o wrapper do maven que está embutido no projeto e docker-compose que monta o container do banco de dados e da aplicação. 
+Para construir a aplicação utilizei o framework Spring, pois, por ter maior conhecimento nos seus recursos para criar os testes, configurar o acesso ao banco de dados e desenvolver as apis de forma rápida.
+
+Para este projeto não será há necessidade de instalar as ferramentas para fazer o build e o deploy. Neste caso estou a utilizar o wrapper do maven que está embutido no projeto e docker-compose que monta o container do banco de dados e da aplicação. 
 
 Os banco de dados é o Mysql, por que, é importante destacar que usei o modelo relacional para trabalhar o conceito ACID.
 
