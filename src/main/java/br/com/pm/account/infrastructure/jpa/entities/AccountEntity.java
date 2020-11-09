@@ -4,25 +4,24 @@ import javax.persistence.*;
 
 @Entity(name = "accounts")
 public class AccountEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(name = "document_number", updatable = false, nullable = false)
-    private String documentNumber;
+  @Column(name = "document_number", updatable = false, nullable = false)
+  private String documentNumber;
 
-    public AccountEntity() {
-    }
+  public AccountEntity() {}
 
-    public AccountEntity(String documentNumber) {
-        this.documentNumber = documentNumber;
-    }
+  public AccountEntity(String documentNumber) {
+    this.documentNumber = documentNumber;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getDocumentNumber() {
-        return documentNumber;
-    }
+  public String getDocumentNumber() {
+    return documentNumber;
+  }
 }

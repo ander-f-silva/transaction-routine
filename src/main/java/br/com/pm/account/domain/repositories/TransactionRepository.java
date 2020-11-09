@@ -1,0 +1,8 @@
+package br.com.pm.account.domain.repositories;
+
+import br.com.pm.account.infrastructure.jpa.entities.TransactionEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface TransactionRepository extends JpaRepository<TransactionEntity, Long> {}

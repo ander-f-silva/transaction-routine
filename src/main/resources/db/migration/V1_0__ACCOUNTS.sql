@@ -1,5 +1,5 @@
 CREATE TABLE accounts
 (
-    id              VARCHAR(32) PRIMARY KEY,
+    id              INT PRIMARY KEY AUTO_INCREMENT,
     document_number VARCHAR(16) NOT NULL
 );
