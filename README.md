@@ -57,7 +57,7 @@ Acesse http://localhost:8080/swagger-ui.html para ver e testar os endpoints.
 ![Swagger](/images/swagger.png)
 
 
-## Para realizar o build, os testes do programa
+## Para realizar o build e os testes do programa
 
 Primeiro passo faça o clone do projeto e depois siga os passos abaixo.
 
