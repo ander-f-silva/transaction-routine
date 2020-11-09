@@ -39,7 +39,7 @@ OS name: "mac os x", version: "10.15.7", arch: "x86_64", family: "mac"
 
 * Repositório e versão de código - Github e Git;
 
-* Banco de Dados - H2 (teste) e Mysql (docker);
+* Banco de Dados - Flayway;
 
 * Migration - H2 (teste) e Mysql (docker);
 
