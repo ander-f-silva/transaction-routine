@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  db-service:
+    image: "mysql:5.7"
+    restart: always
+    container_name: transaction-routine-db
+    environment:
+      MYSQL_DATABASE: transaction-routine
+      MYSQL_USER: transaction-routine
+      MYSQL_PASSWORD: transaction-routine
+      MYSQL_ROOT_PASSWORD: transaction-routine
+    ports:
+      - "3306:3306"
+    networks:
+      - local-network
+
+  app-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image:
+      transaction-routine:latest
+    container_name: transaction-routine-app
+    environment:
+      DB_USERNAME: transaction-routine
+      DB_PASSWORD: transaction-routine
+      DB_ENDPOINT: jdbc:mysql://db-service:3306/transaction-routine?useSSL=false
+    ports:
+      - "8080:8080"
+    networks:
+      - local-network
+    depends_on:
+      - db-service
+
+networks:
+  local-network:
+    driver: bridge
