@@ -1,6 +1,6 @@
 # Projeto Rotina de transações
 
-Desenvolvi uma solução para realizar as operações de pagamentos e compras para uma conta. Neste serviço estão contemplados as seguintes funcionalidades:
+Desenvolvi uma solução para registrar as operações de pagamentos e compras para uma conta. Neste serviço estão contemplados as seguintes funcionalidades:
 
 - Registrar uma conta;
 - Registrar uma transação;
