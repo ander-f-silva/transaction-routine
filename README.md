@@ -39,10 +39,9 @@ OS name: "mac os x", version: "10.15.7", arch: "x86_64", family: "mac"
 
 * Repositório e versão de código - Github e Git;
 
-* Banco de Dados - Flayway;
+* Migration - Flayway;
 
-* Migration - H2 (teste) e Mysql (docker);
-
+* Banco de Dados - H2 (teste) e Mysql (docker);
 
 * Spring Web (MVC) - Framerwork Web para geração das API's (versão 2.3.5) com Tomcat 9;
 
