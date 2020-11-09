@@ -8,8 +8,7 @@ public class AccountRequest {
   @CPF
   private String documentNumber;
 
-  public AccountRequest() {
-  }
+  public AccountRequest() {}
 
   public AccountRequest(String documentNumber) {
     this.documentNumber = documentNumber;

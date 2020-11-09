@@ -7,20 +7,24 @@ import javax.persistence.Id;
 
 @Entity(name = "operations_types")
 public class OperationTypeEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-    private String description;
+  private String description;
 
-    public OperationTypeEntity() {
-    }
+  public OperationTypeEntity(Integer id, String description) {
+    this.id = id;
+    this.description = description;
+  }
 
-    public String getId() {
-        return id;
-    }
+  public OperationTypeEntity() {}
 
-    public String getDescription() {
-        return description;
-    }
+  public Integer getId() {
+    return id;
+  }
+
+  public String getDescription() {
+    return description;
+  }
 }

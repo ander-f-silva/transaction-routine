@@ -2,17 +2,22 @@ package br.com.pm.account.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 public class TransactionRequest {
   @JsonProperty("account_id")
-   private Long accountId;
+  @NotNull
+  @Positive
+  private Long accountId;
 
   @JsonProperty("operation_type_id")
+  @NotNull
   private Integer operationTypeId;
 
-  private Double amount;
+  @NotNull @Positive private Double amount;
 
-  public TransactionRequest() {
-  }
+  public TransactionRequest() {}
 
   public TransactionRequest(Long accountId, Integer operationTypeId, Double amount) {
     this.accountId = accountId;

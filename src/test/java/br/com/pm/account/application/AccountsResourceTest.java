@@ -13,10 +13,12 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 class AccountsResourceTest {
   @Autowired private TestRestTemplate restTemplate;
   @Autowired private AccountRepository accountRepository;
@@ -68,7 +70,7 @@ class AccountsResourceTest {
     var account = accountRepository.save(new AccountEntity("37995834080"));
     var id = account.getId();
 
-    var response = restTemplate.getForEntity("/accounts/"+id, AccountResponse.class);
+    var response = restTemplate.getForEntity("/accounts/" + id, AccountResponse.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(response.getBody().getId()).isEqualTo(id);
