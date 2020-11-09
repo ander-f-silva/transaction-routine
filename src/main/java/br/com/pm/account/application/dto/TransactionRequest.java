@@ -13,6 +13,7 @@ public class TransactionRequest {
 
   @JsonProperty("operation_type_id")
   @NotNull
+  @Positive
   private Integer operationTypeId;
 
   @NotNull @Positive private Double amount;
