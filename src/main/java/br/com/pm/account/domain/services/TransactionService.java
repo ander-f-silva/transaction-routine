@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 class TransactionService implements TransactionOperation {
+  private static final Integer OPERATION_PAYMENT_ID = 4;
+
   private final AccountRepository accountRepository;
   private final TransactionRepository transactionRepository;
   private final OperationTypeRepository operationTypeRepository;
@@ -37,6 +39,10 @@ class TransactionService implements TransactionOperation {
         operationTypeRepository
             .findById(operationTypeId)
             .orElseThrow(() -> new TransactionNotProcessException("The operation not found"));
+
+    if (!OPERATION_PAYMENT_ID.equals(operationTypeId)) {
+      amount = - Math.abs(amount);
+    }
 
     var transaction =
         transactionRepository.save(new TransactionEntity(account, operationType, amount));
