@@ -13,6 +13,11 @@ public class AccountEntity {
 
   public AccountEntity() {}
 
+  public AccountEntity(Long id, String documentNumber) {
+    this.id = id;
+    this.documentNumber = documentNumber;
+  }
+
   public AccountEntity(String documentNumber) {
     this.documentNumber = documentNumber;
   }

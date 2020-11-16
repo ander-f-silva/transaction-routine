@@ -1,7 +1,7 @@
 package br.com.pm.account.application;
 
-import br.com.pm.account.application.dto.AccountRequest;
-import br.com.pm.account.application.dto.AccountResponse;
+import br.com.pm.account.application.dto.AccountInput;
+import br.com.pm.account.application.dto.AccountOutput;
 import br.com.pm.account.domain.repositories.AccountRepository;
 import br.com.pm.account.infrastructure.jpa.entities.AccountEntity;
 import org.junit.jupiter.api.DisplayName;
@@ -26,7 +26,7 @@ class AccountsResourceTest {
   @Test
   @DisplayName("should create an account with success")
   void testCreateAccountWithSuccess() {
-    var request = new HttpEntity<>(new AccountRequest("73502752001"), new HttpHeaders());
+    var request = new HttpEntity<>(new AccountInput("73502752001"), new HttpHeaders());
     var response = restTemplate.postForEntity("/accounts", request, Void.class);
 
     var location = response.getHeaders().get(HttpHeaders.LOCATION).get(0);
@@ -38,7 +38,7 @@ class AccountsResourceTest {
   @Test
   @DisplayName("should fail the creation of the account when document not informed")
   void testDocumentNotInformedToCreateAccount() {
-    var request = new HttpEntity<>(new AccountRequest(""), new HttpHeaders());
+    var request = new HttpEntity<>(new AccountInput(""), new HttpHeaders());
     var response = restTemplate.postForEntity("/accounts", request, Void.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
@@ -47,7 +47,7 @@ class AccountsResourceTest {
   @Test
   @DisplayName("should fail the creation of the account when document invalid")
   void testDocumentInvalidToCreateAccount() {
-    var request = new HttpEntity<>(new AccountRequest("1234567890"), new HttpHeaders());
+    var request = new HttpEntity<>(new AccountInput("1234567890"), new HttpHeaders());
     var response = restTemplate.postForEntity("/accounts", request, Void.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
@@ -58,7 +58,7 @@ class AccountsResourceTest {
   void testExistingAccount() {
     accountRepository.save(new AccountEntity("97242904099"));
 
-    var request = new HttpEntity<>(new AccountRequest("97242904099"), new HttpHeaders());
+    var request = new HttpEntity<>(new AccountInput("97242904099"), new HttpHeaders());
     var response = restTemplate.postForEntity("/accounts", request, Void.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
@@ -70,7 +70,7 @@ class AccountsResourceTest {
     var account = accountRepository.save(new AccountEntity("37995834080"));
     var id = account.getId();
 
-    var response = restTemplate.getForEntity("/accounts/" + id, AccountResponse.class);
+    var response = restTemplate.getForEntity("/accounts/" + id, AccountOutput.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(response.getBody().getId()).isEqualTo(id);
@@ -80,7 +80,7 @@ class AccountsResourceTest {
   @Test
   @DisplayName("should return the data an account")
   void testFindAccountNotFound() {
-    var response = restTemplate.getForEntity("/accounts/0", AccountResponse.class);
+    var response = restTemplate.getForEntity("/accounts/0", AccountOutput.class);
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
   }
 }

@@ -1,22 +1,17 @@
 package br.com.pm.account.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.br.CPF;
 
-public class AccountResponse {
-  private Long id;
-
+public class AccountInput {
   @JsonProperty("document_number")
+  @CPF
   private String documentNumber;
 
-  public AccountResponse() {}
+  public AccountInput() {}
 
-  public AccountResponse(Long id, String documentNumber) {
-    this.id = id;
+  public AccountInput(String documentNumber) {
     this.documentNumber = documentNumber;
-  }
-
-  public Long getId() {
-    return id;
   }
 
   public String getDocumentNumber() {

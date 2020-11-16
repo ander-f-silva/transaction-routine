@@ -1,10 +1,12 @@
 package br.com.pm.account.domain.services;
 
-import br.com.pm.account.application.dto.AccountRequest;
-import br.com.pm.account.application.dto.AccountResponse;
+import br.com.pm.account.application.dto.AccountInput;
+import br.com.pm.account.application.dto.AccountOutput;
+import br.com.pm.account.application.dto.ErrorOutput;
+import br.com.pm.account.application.dto.ResultAccountOutput;
 
 public interface AccountOperation {
-  Long createNewAccount(AccountRequest accountRequest);
+  ResultAccountOutput<Long, ErrorOutput> createNewAccount(AccountInput accountInput);
 
-  AccountResponse getAccount(Long id);
+  AccountOutput getAccount(Long id);
 }

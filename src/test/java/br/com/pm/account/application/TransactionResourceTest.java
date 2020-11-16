@@ -1,6 +1,6 @@
 package br.com.pm.account.application;
 
-import br.com.pm.account.application.dto.TransactionRequest;
+import br.com.pm.account.application.dto.TransactionInput;
 import br.com.pm.account.domain.repositories.AccountRepository;
 import br.com.pm.account.domain.repositories.TransactionRepository;
 import br.com.pm.account.infrastructure.jpa.entities.AccountEntity;
@@ -35,7 +35,7 @@ class TransactionResourceTest {
 
     var request =
         new HttpEntity<>(
-            new TransactionRequest(account.getId(), BUY_CASH_ID, 550.55), new HttpHeaders());
+            new TransactionInput(account.getId(), BUY_CASH_ID, 550.55), new HttpHeaders());
     var response = restTemplate.postForEntity("/transactions", request, Void.class);
 
     var location = response.getHeaders().get(HttpHeaders.LOCATION).get(0);
@@ -50,7 +50,7 @@ class TransactionResourceTest {
     var accountId = 1000L;
 
     var request =
-        new HttpEntity<>(new TransactionRequest(accountId, BUY_CASH_ID, 550.55), new HttpHeaders());
+        new HttpEntity<>(new TransactionInput(accountId, BUY_CASH_ID, 550.55), new HttpHeaders());
     var response = restTemplate.postForEntity("/transactions", request, Void.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
@@ -64,7 +64,7 @@ class TransactionResourceTest {
 
     var request =
         new HttpEntity<>(
-            new TransactionRequest(account.getId(), operationNotFound, 550.55), new HttpHeaders());
+            new TransactionInput(account.getId(), operationNotFound, 550.55), new HttpHeaders());
     var response = restTemplate.postForEntity("/transactions", request, Void.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
@@ -77,7 +77,7 @@ class TransactionResourceTest {
 
     var request =
         new HttpEntity<>(
-            new TransactionRequest(account.getId(), BUY_CASH_ID, null), new HttpHeaders());
+            new TransactionInput(account.getId(), BUY_CASH_ID, null), new HttpHeaders());
     var response = restTemplate.postForEntity("/transactions", request, Void.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
@@ -90,7 +90,7 @@ class TransactionResourceTest {
 
     var request =
         new HttpEntity<>(
-            new TransactionRequest(account.getId(), BUY_CASH_ID, -500.00), new HttpHeaders());
+            new TransactionInput(account.getId(), BUY_CASH_ID, -500.00), new HttpHeaders());
     var response = restTemplate.postForEntity("/transactions", request, Void.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
@@ -100,7 +100,7 @@ class TransactionResourceTest {
   @DisplayName("should fail when the account id is null")
   void testFailTransactionToAccountIdNull() {
     var request =
-        new HttpEntity<>(new TransactionRequest(null, BUY_CASH_ID, 55.00), new HttpHeaders());
+        new HttpEntity<>(new TransactionInput(null, BUY_CASH_ID, 55.00), new HttpHeaders());
     var response = restTemplate.postForEntity("/transactions", request, Void.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
@@ -113,7 +113,7 @@ class TransactionResourceTest {
 
     var request =
         new HttpEntity<>(
-            new TransactionRequest(accountIdNegative, BUY_CASH_ID, 54.00), new HttpHeaders());
+            new TransactionInput(accountIdNegative, BUY_CASH_ID, 54.00), new HttpHeaders());
     var response = restTemplate.postForEntity("/transactions", request, Void.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
@@ -125,7 +125,7 @@ class TransactionResourceTest {
     var account = accountRepository.saveAndFlush(new AccountEntity("64002480054"));
 
     var request =
-        new HttpEntity<>(new TransactionRequest(account.getId(), null, 55.00), new HttpHeaders());
+        new HttpEntity<>(new TransactionInput(account.getId(), null, 55.00), new HttpHeaders());
     var response = restTemplate.postForEntity("/transactions", request, Void.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
@@ -138,7 +138,7 @@ class TransactionResourceTest {
     var operationTypeNegative = -1;
 
     var request =
-            new HttpEntity<>(new TransactionRequest(account.getId(), operationTypeNegative, 55.00), new HttpHeaders());
+            new HttpEntity<>(new TransactionInput(account.getId(), operationTypeNegative, 55.00), new HttpHeaders());
     var response = restTemplate.postForEntity("/transactions", request, Void.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
@@ -151,7 +151,7 @@ class TransactionResourceTest {
 
     var request =
             new HttpEntity<>(
-                    new TransactionRequest(account.getId(), BUY_CASH_ID, 659.55), new HttpHeaders());
+                    new TransactionInput(account.getId(), BUY_CASH_ID, 659.55), new HttpHeaders());
     var response = restTemplate.postForEntity("/transactions", request, Void.class);
 
     var location = response.getHeaders().get(HttpHeaders.LOCATION).get(0);
@@ -171,7 +171,7 @@ class TransactionResourceTest {
 
     var request =
             new HttpEntity<>(
-                    new TransactionRequest(account.getId(), PAYMENT, 300.00), new HttpHeaders());
+                    new TransactionInput(account.getId(), PAYMENT, 300.00), new HttpHeaders());
     var response = restTemplate.postForEntity("/transactions", request, Void.class);
 
     var location = response.getHeaders().get(HttpHeaders.LOCATION).get(0);

@@ -1,6 +1,6 @@
 package br.com.pm.account.application;
 
-import br.com.pm.account.application.dto.TransactionRequest;
+import br.com.pm.account.application.dto.TransactionInput;
 import br.com.pm.account.domain.services.TransactionOperation;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +23,8 @@ class TransactionResource {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Void> create(@Valid @RequestBody TransactionRequest transactionRequest) {
-    var id = transactionOperation.authorizerTransaction(transactionRequest);
+  public ResponseEntity<Void> create(@Valid @RequestBody TransactionInput transactionInput) {
+    var id = transactionOperation.authorizerTransaction(transactionInput);
     URI location =
         ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
     return ResponseEntity.created(location).build();
