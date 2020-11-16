@@ -1,14 +1,19 @@
 package br.com.pm.account.application.dto;
 
-public class MessageResponse {
+public class ErrorOutput {
   private int code;
   private String message;
 
-  public MessageResponse() {}
+  public ErrorOutput() {}
 
-  public MessageResponse(int code, String message) {
+  public ErrorOutput(int code, String message) {
     this.code = code;
     this.message = message;
+  }
+
+  public ErrorOutput(String message) {
+    this.message = message;
+
   }
 
   public int getCode() {

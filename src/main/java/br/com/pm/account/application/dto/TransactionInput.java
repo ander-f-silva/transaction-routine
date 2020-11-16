@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
-public class TransactionRequest {
+public class TransactionInput {
   @JsonProperty("account_id")
   @NotNull
   @Positive
@@ -18,9 +18,9 @@ public class TransactionRequest {
 
   @NotNull @Positive private Double amount;
 
-  public TransactionRequest() {}
+  public TransactionInput() {}
 
-  public TransactionRequest(Long accountId, Integer operationTypeId, Double amount) {
+  public TransactionInput(Long accountId, Integer operationTypeId, Double amount) {
     this.accountId = accountId;
     this.operationTypeId = operationTypeId;
     this.amount = amount;

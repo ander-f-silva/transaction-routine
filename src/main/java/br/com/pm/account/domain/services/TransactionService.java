@@ -1,6 +1,6 @@
 package br.com.pm.account.domain.services;
 
-import br.com.pm.account.application.dto.TransactionRequest;
+import br.com.pm.account.application.dto.TransactionInput;
 import br.com.pm.account.domain.repositories.AccountRepository;
 import br.com.pm.account.domain.repositories.OperationTypeRepository;
 import br.com.pm.account.domain.repositories.TransactionRepository;
@@ -26,10 +26,10 @@ class TransactionService implements TransactionOperation {
   }
 
   @Override
-  public Long authorizerTransaction(TransactionRequest transactionRequest) {
-    var accountId = transactionRequest.getAccountId();
-    var operationTypeId = transactionRequest.getOperationTypeId();
-    var amount = transactionRequest.getAmount();
+  public Long authorizerTransaction(TransactionInput transactionInput) {
+    var accountId = transactionInput.getAccountId();
+    var operationTypeId = transactionInput.getOperationTypeId();
+    var amount = transactionInput.getAmount();
 
     var account =
         accountRepository
