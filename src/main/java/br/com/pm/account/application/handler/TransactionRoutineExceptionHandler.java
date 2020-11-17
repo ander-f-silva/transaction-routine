@@ -1,7 +1,6 @@
 package br.com.pm.account.application.handler;
 
-import br.com.pm.account.application.dto.MessageResponse;
-import br.com.pm.account.domain.services.exception.AccountAlreadyCreatedException;
+import br.com.pm.account.application.dto.ErrorOutput;
 import br.com.pm.account.domain.services.exception.AccountNotFoundException;
 import br.com.pm.account.domain.services.exception.TransactionNotProcessException;
 import org.springframework.http.HttpStatus;
@@ -13,17 +12,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice(basePackages = "br.com.pm.account")
 class TransactionRoutineExceptionHandler extends ResponseEntityExceptionHandler {
-  @ExceptionHandler(AccountAlreadyCreatedException.class)
-  ResponseEntity<?> handleConflict(RuntimeException runtimeException, WebRequest request) {
-    return new ResponseEntity<>(
-        new MessageResponse(HttpStatus.CONFLICT.value(), runtimeException.getMessage()),
-        HttpStatus.CONFLICT);
-  }
-
   @ExceptionHandler(AccountNotFoundException.class)
   ResponseEntity<?> handleNotFound(RuntimeException runtimeException, WebRequest request) {
     return new ResponseEntity<>(
-        new MessageResponse(HttpStatus.NOT_FOUND.value(), runtimeException.getMessage()),
+        new ErrorOutput(HttpStatus.NOT_FOUND.value(), runtimeException.getMessage()),
         HttpStatus.NOT_FOUND);
   }
 
@@ -31,7 +23,7 @@ class TransactionRoutineExceptionHandler extends ResponseEntityExceptionHandler 
   ResponseEntity<?> handleUnprocessableEntity(
       RuntimeException runtimeException, WebRequest request) {
     return new ResponseEntity<>(
-        new MessageResponse(HttpStatus.UNPROCESSABLE_ENTITY.value(), runtimeException.getMessage()),
+        new ErrorOutput(HttpStatus.UNPROCESSABLE_ENTITY.value(), runtimeException.getMessage()),
         HttpStatus.UNPROCESSABLE_ENTITY);
   }
 }
